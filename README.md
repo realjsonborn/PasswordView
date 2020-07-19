@@ -1,4 +1,6 @@
 PasswordView
+新修正：可自定义文字颜色
+
 ====
 下划线（方框）密码输入框
 
@@ -16,6 +18,7 @@ PasswordView
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         app:mode="rect"
+        app:textColor="@color/White"
         app:passwordSize="40dp"/>
 ```
  详细请下载[Demo](https://codeload.github.com/EoniJJ/PasswordView/zip/master)查看
@@ -30,6 +33,7 @@ PasswordView
 + cipherTextSize（‘*’号大小）
 + cursorColor（光标颜色）
 + cipherEnable(是否启用‘*’显示)
++ textColor(自定义颜色)
 
 ## License 
 > The MIT license.
