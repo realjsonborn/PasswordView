@@ -26,7 +26,6 @@ import java.util.TimerTask;
  * Created by Arron on 2016/11/21 0021.
  * 密码输入框
  */
-
 public class PasswordView extends View {
 
     private Mode mode; //样式模式
@@ -35,6 +34,7 @@ public class PasswordView extends View {
     private int passwordPadding;//每个密码间的间隔
     private int passwordSize = dp2px(40);//单个密码大小
     private int borderColor;//边框颜色
+    private int textColor;//文字颜色
     private int borderWidth;//下划线粗细
     private int cursorPosition;//光标位置
     private int cursorWidth;//光标粗细
@@ -52,6 +52,7 @@ public class PasswordView extends View {
     private Paint paint;
     private Timer timer;
     private TimerTask timerTask;
+
     public PasswordView(Context context) {
         super(context);
     }
@@ -111,10 +112,12 @@ public class PasswordView extends View {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.PasswordView);
             mode = Mode.formMode(typedArray.getInteger(R.styleable.PasswordView_mode, Mode.UNDERLINE.getMode()));
             passwordLength = typedArray.getInteger(R.styleable.PasswordView_passwordLength, 4);
+            passwordSize = typedArray.getInteger(R.styleable.PasswordView_passwordSize, dp2px(20));
             cursorFlashTime = typedArray.getInteger(R.styleable.PasswordView_cursorFlashTime, 500);
             borderWidth = typedArray.getDimensionPixelSize(R.styleable.PasswordView_borderWidth, dp2px(3));
             borderColor = typedArray.getColor(R.styleable.PasswordView_borderColor, Color.BLACK);
             cursorColor = typedArray.getColor(R.styleable.PasswordView_cursorColor, Color.GRAY);
+            textColor = typedArray.getColor(R.styleable.PasswordView_textColor, Color.WHITE);
             isCursorEnable = typedArray.getBoolean(R.styleable.PasswordView_isCursorEnable, true);
             //如果为边框样式，则padding 默认置为0
             if (mode == Mode.UNDERLINE) {
@@ -300,7 +303,8 @@ public class PasswordView extends View {
      */
     private void drawCipherText(Canvas canvas, Paint paint) {
         //画笔初始化
-        paint.setColor(Color.GRAY);
+        paint.setColor(textColor);
+        //paint.setColor(Color.GRAY);
         paint.setTextSize(cipherTextSize);
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setStyle(Paint.Style.FILL);
@@ -466,6 +470,11 @@ public class PasswordView extends View {
         postInvalidate();
     }
 
+    public void setTextColor(int textColor) {
+        this.textColor = textColor;
+        postInvalidate();
+    }
+
     public void setCipherEnable(boolean cipherEnable) {
         this.cipherEnable = cipherEnable;
         postInvalidate();
@@ -478,7 +487,7 @@ public class PasswordView extends View {
         /**
          * 输入/删除监听
          *
-         * @param changeText  输入/删除的字符
+         * @param changeText 输入/删除的字符
          */
         void passwordChange(String changeText);
 
