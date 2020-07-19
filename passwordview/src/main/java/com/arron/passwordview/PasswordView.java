@@ -249,7 +249,7 @@ public class PasswordView extends View {
     /**
      * 删除
      */
-    private String delete() {
+    public String delete() {
         String deleteText = null;
         if (cursorPosition > 0) {
             deleteText = password[cursorPosition - 1];
@@ -266,7 +266,7 @@ public class PasswordView extends View {
     /**
      * 增加
      */
-    private String add(String c) {
+    public String add(String c) {
         String addText = null;
         if (cursorPosition < passwordLength) {
             addText = c;
